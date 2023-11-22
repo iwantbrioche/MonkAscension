@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace MonkAscension
 {
-    [BepInPlugin("bobby.ascensiontest", "ascensiontest", "1.0.0")]
     public partial class MonkAscension : BaseUnityPlugin
     {
         private void OnEnable()
@@ -39,6 +38,7 @@ namespace MonkAscension
         }
 
         public static Dictionary<PlayerGraphics, int> godPipsIndex = new();
+        // Dictionary for keeping track of the indexes of the added sprites
 
         private void Player_ctor(On.Player.orig_ctor orig, Player self, AbstractCreature abstractCreature, World world)
         {
@@ -46,6 +46,7 @@ namespace MonkAscension
             if (self.SlugCatClass == SlugcatStats.Name.Yellow)
             {
                 self.maxGodTime = (int)(200f + 40f * (float)self.Karma);
+                // Sets the maxGodTime for the godTimer
                 if (self.room != null && self.room.world.name == "HR")
                 {
                     self.maxGodTime = 560f;
@@ -69,6 +70,7 @@ namespace MonkAscension
                 {
                     self.ActivateAscension();
                 }
+                // Activate and Deactivate Ascension mode
             }
         }
 
@@ -78,28 +80,35 @@ namespace MonkAscension
             if (self.player.SlugCatClass == SlugcatStats.Name.Yellow)
             {
                 Array.Resize(ref sLeaser.sprites, sLeaser.sprites.Length + self.numGodPips + 2);
+                // Resizes the sLeaser sprite array to add the amount of numGodPips (12), and 2 for the crosshair and glow
+                // If you have already resized the sprite array then you need to combine it with above, you will also need to adjust the dictionary as well
 
                 if (godPipsIndex.ContainsKey(self)) { godPipsIndex[self] = sLeaser.sprites.Length - self.numGodPips - 2; }
                 else { godPipsIndex.Add(self, sLeaser.sprites.Length - self.numGodPips - 2); }
+                // Add self as a key for godPipsIndex dictionary and store the first index of numGodPips + 2
+                // godPipsIndex[self] = 13
+                // godPipsIndex[self] + 1 = 14
+                // godPipsIndex[self] + 2 = 15
 
                 sLeaser.sprites[godPipsIndex[self]] = new FSprite("Futile_White");
                 sLeaser.sprites[godPipsIndex[self]].shader = rCam.game.rainWorld.Shaders["FlatLight"];
+                // Set sprite for energy burst on ascension
+
+                rCam.ReturnFContainer("Midground").AddChild(sLeaser.sprites[godPipsIndex[self]]);
+                // Add to FContainer Midground
 
                 sLeaser.sprites[godPipsIndex[self] + 1] = new FSprite("guardEye");
-                rCam.ReturnFContainer("Midground").AddChild(sLeaser.sprites[godPipsIndex[self]]);
+                // Set sprite for ascension crosshair
 
                 for (int i = 0; i < self.numGodPips; i++)
                 {
                     sLeaser.sprites[godPipsIndex[self] + 2 + i] = new FSprite("WormEye");
+                    // Set sprite for the godPips timer
+
                     sLeaser.sprites[godPipsIndex[self] + 2 + i].RemoveFromContainer();
                     rCam.ReturnFContainer("HUD2").AddChild(sLeaser.sprites[godPipsIndex[self] + 2 + i]);
+                    // Remove from container and add godPips to FContainer HUD2
                 }
-                if (self.gown != null)
-                {
-                    self.gownIndex = sLeaser.sprites.Length - 1;
-                    self.gown.InitiateSprite(self.gownIndex, sLeaser, rCam);
-                }
-                self.AddToContainer(sLeaser, rCam, null);
             }
         }
         private void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, Vector2 camPos)
@@ -107,6 +116,7 @@ namespace MonkAscension
             orig(self, sLeaser, rCam, timeStacker, camPos);
             if (self.player.room != null && self.player.SlugCatClass == SlugcatStats.Name.Yellow)
             {
+                // Taken from saint's code, handles ascension crosshair, godPips, and effects
                 if (self.player.killFac > 0f || self.player.forceBurst)
                 {
                     sLeaser.sprites[godPipsIndex[self]].isVisible = true;
