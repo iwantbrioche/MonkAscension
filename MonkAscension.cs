@@ -80,7 +80,7 @@ namespace MonkAscension
             if (self.player.SlugCatClass == SlugcatStats.Name.Yellow)
             {
                 Array.Resize(ref sLeaser.sprites, sLeaser.sprites.Length + self.numGodPips + 2);
-                // Resizes the sLeaser sprite array to add the amount of numGodPips (12), and 2 for the crosshair and glow
+                // Resizes the sLeaser sprite array to add the amount of numGodPips (12), and 2 for the crosshair and energy burst
                 // If you have already resized the sprite array then you need to combine it with above, you will also need to adjust the dictionary as well
 
                 if (godPipsIndex.ContainsKey(self)) { godPipsIndex[self] = sLeaser.sprites.Length - self.numGodPips - 2; }
