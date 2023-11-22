@@ -45,8 +45,8 @@ namespace MonkAscension
             orig(self, abstractCreature, world);
             if (self.SlugCatClass == SlugcatStats.Name.Yellow)
             {
-                self.maxGodTime = (int)(200f + 40f * (float)self.Karma);
                 // Sets the maxGodTime for the godTimer
+                self.maxGodTime = (int)(200f + 40f * (float)self.Karma);
                 if (self.room != null && self.room.world.name == "HR")
                 {
                     self.maxGodTime = 560f;
@@ -61,6 +61,7 @@ namespace MonkAscension
             orig(self);
             if (self.SlugCatClass == SlugcatStats.Name.Yellow)
             {
+                // Activate and Deactivate Ascension
                 if (self.wantToJump > 0 && self.monkAscension)
                 {
                     self.DeactivateAscension();
@@ -70,7 +71,7 @@ namespace MonkAscension
                 {
                     self.ActivateAscension();
                 }
-                // Activate and Deactivate Ascension mode
+
             }
         }
 
