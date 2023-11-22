@@ -38,7 +38,6 @@ namespace MonkAscension
             }
         }
 
-
         public static Dictionary<PlayerGraphics, int> godPipsIndex = new();
 
         private void Player_ctor(On.Player.orig_ctor orig, Player self, AbstractCreature abstractCreature, World world)
@@ -79,19 +78,28 @@ namespace MonkAscension
             if (self.player.SlugCatClass == SlugcatStats.Name.Yellow)
             {
                 Array.Resize(ref sLeaser.sprites, sLeaser.sprites.Length + self.numGodPips + 2);
+
                 if (godPipsIndex.ContainsKey(self)) { godPipsIndex[self] = sLeaser.sprites.Length - self.numGodPips - 2; }
                 else { godPipsIndex.Add(self, sLeaser.sprites.Length - self.numGodPips - 2); }
 
                 sLeaser.sprites[godPipsIndex[self]] = new FSprite("Futile_White");
                 sLeaser.sprites[godPipsIndex[self]].shader = rCam.game.rainWorld.Shaders["FlatLight"];
+
                 sLeaser.sprites[godPipsIndex[self] + 1] = new FSprite("guardEye");
                 rCam.ReturnFContainer("Midground").AddChild(sLeaser.sprites[godPipsIndex[self]]);
+
                 for (int i = 0; i < self.numGodPips; i++)
                 {
                     sLeaser.sprites[godPipsIndex[self] + 2 + i] = new FSprite("WormEye");
                     sLeaser.sprites[godPipsIndex[self] + 2 + i].RemoveFromContainer();
                     rCam.ReturnFContainer("HUD2").AddChild(sLeaser.sprites[godPipsIndex[self] + 2 + i]);
                 }
+                if (self.gown != null)
+                {
+                    self.gownIndex = sLeaser.sprites.Length - 1;
+                    self.gown.InitiateSprite(self.gownIndex, sLeaser, rCam);
+                }
+                self.AddToContainer(sLeaser, rCam, null);
             }
         }
         private void PlayerGraphics_DrawSprites(On.PlayerGraphics.orig_DrawSprites orig, PlayerGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, Vector2 camPos)
@@ -215,10 +223,6 @@ namespace MonkAscension
                     sLeaser.sprites[n].x = vector16.x;
                     sLeaser.sprites[n].y = vector16.y;
                 }
-            }
-            if (self.gown != null)
-            {
-                self.gown.DrawSprite(self.gownIndex, sLeaser, rCam, timeStacker, camPos);
             }
         }
     }
