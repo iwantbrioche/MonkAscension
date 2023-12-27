@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MonkAscension
 {
-    public partial class MonkAscension : BaseUnityPlugin
+    public class MonkAscension : BaseUnityPlugin
     {
         private void OnEnable()
         {
@@ -95,7 +95,6 @@ namespace MonkAscension
                 sLeaser.sprites[godPipsIndex[self]] = new FSprite("Futile_White");
                 sLeaser.sprites[godPipsIndex[self]].shader = rCam.game.rainWorld.Shaders["FlatLight"];
                 // Set sprite for energy burst on ascension
-
                 rCam.ReturnFContainer("Midground").AddChild(sLeaser.sprites[godPipsIndex[self]]);
                 // Add to FContainer Midground
 
@@ -237,5 +236,6 @@ namespace MonkAscension
                 }
             }
         }
+        // Ascension ascending creatures logic is already handled by base game in ClassMechanicsSaint, if you want to edit that then you'd need to create a new hook
     }
 }
