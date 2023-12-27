@@ -47,6 +47,7 @@ namespace MonkAscension
             {
                 // Sets the maxGodTime for the godTimer
                 self.maxGodTime = (int)(200f + 40f * (float)self.Karma);
+                // You won't need this if statement if your slugcat doesn't go to Rubicon
                 if (self.room != null && self.room.world.name == "HR")
                 {
                     self.maxGodTime = 560f;
