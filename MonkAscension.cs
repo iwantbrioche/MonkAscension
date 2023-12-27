@@ -87,9 +87,9 @@ namespace MonkAscension
                 if (godPipsIndex.ContainsKey(self)) { godPipsIndex[self] = sLeaser.sprites.Length - self.numGodPips - 2; }
                 else { godPipsIndex.Add(self, sLeaser.sprites.Length - self.numGodPips - 2); }
                 // Add self as a key for godPipsIndex dictionary and store the first index of numGodPips + 2
-                // godPipsIndex[self] = 13
-                // godPipsIndex[self] + 1 = 14
-                // godPipsIndex[self] + 2 = 15
+                // godPipsIndex[self] = 13 (index of energy burst)
+                // godPipsIndex[self] + 1 = 14 (index of crosshair)
+                // godPipsIndex[self] + 2 = 15 (starting index of numGodPips)
 
                 sLeaser.sprites[godPipsIndex[self]] = new FSprite("Futile_White");
                 sLeaser.sprites[godPipsIndex[self]].shader = rCam.game.rainWorld.Shaders["FlatLight"];
