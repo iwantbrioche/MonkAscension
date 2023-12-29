@@ -9,34 +9,22 @@
 
   <ItemGroup>
     <Reference Include="BepInEx">
-      <HintPath>..\..\..\dnSpy-net-win32\rain world references\BepInEx.dll</HintPath>
+      <HintPath>lib\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="HOOKS-Assembly-CSharp">
-      <HintPath>..\..\..\dnSpy-net-win32\rain world references\HOOKS-Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>..\..\..\dnSpy-net-win32\rain world references\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod">
-      <HintPath>..\..\..\dnSpy-net-win32\rain world references\MonoMod.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.RuntimeDetour">
-      <HintPath>..\..\..\dnSpy-net-win32\rain world references\MonoMod.RuntimeDetour.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.Utils">
-      <HintPath>..\..\..\dnSpy-net-win32\rain world references\MonoMod.Utils.dll</HintPath>
+      <HintPath>lib\HOOKS-Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\dnSpy-net-win32\rain world references\PUBLIC-Assembly-CSharp.dll</HintPath>
+      <HintPath>lib\PUBLIC-Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\dnSpy-net-win32\rain world references\UnityEngine.dll</HintPath>
+      <HintPath>lib\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\dnSpy-net-win32\rain world references\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>lib\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\..\..\dnSpy-net-win32\rain world references\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>lib\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
   </ItemGroup>
 
