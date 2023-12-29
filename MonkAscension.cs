@@ -229,7 +229,7 @@ namespace MonkAscension
                 for (int n = godPipsIndex[self] + 2; n < godPipsIndex[self] + 2 + self.numGodPips; n++)
                 {
                     sLeaser.sprites[n].alpha = self.rubberAlphaPips;
-                    Vector2 vector16 = new Vector2(sLeaser.sprites[14].x, sLeaser.sprites[14].y);
+                    Vector2 vector16 = new Vector2(sLeaser.sprites[godPipsIndex[self] + 1].x, sLeaser.sprites[godPipsIndex[self] + 1].y);
                     vector16 += Custom.rotateVectorDeg(Vector2.one * self.rubberRadius, (float)(n - 15) * (360f / (float)self.numGodPips));
                     sLeaser.sprites[n].x = vector16.x;
                     sLeaser.sprites[n].y = vector16.y;
