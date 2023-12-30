@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace MonkAscension
 {
+    [BepInPlugin("bobby.ascensiontest", "Monk Ascension", "1.0")]
     public class MonkAscension : BaseUnityPlugin
     {
         private void OnEnable()
@@ -95,11 +96,15 @@ namespace MonkAscension
                 sLeaser.sprites[godPipsIndex[self]] = new FSprite("Futile_White");
                 sLeaser.sprites[godPipsIndex[self]].shader = rCam.game.rainWorld.Shaders["FlatLight"];
                 // Set sprite for energy burst on ascension
-                rCam.ReturnFContainer("Midground").AddChild(sLeaser.sprites[godPipsIndex[self]]);
-                // Add to FContainer Midground
+                sLeaser.sprites[godPipsIndex[self]].RemoveFromContainer();
+                rCam.ReturnFContainer("Foreground").AddChild(sLeaser.sprites[godPipsIndex[self]]);
+                // Add energy burst to FContainer Foreground
 
                 sLeaser.sprites[godPipsIndex[self] + 1] = new FSprite("guardEye");
                 // Set sprite for ascension crosshair
+                sLeaser.sprites[godPipsIndex[self] + 1].RemoveFromContainer();
+                rCam.ReturnFContainer("Foreground").AddChild(sLeaser.sprites[godPipsIndex[self] + 1]);
+                // Add crosshair to FContainer ForeGround
 
                 for (int i = 0; i < self.numGodPips; i++)
                 {
@@ -108,7 +113,7 @@ namespace MonkAscension
 
                     sLeaser.sprites[godPipsIndex[self] + 2 + i].RemoveFromContainer();
                     rCam.ReturnFContainer("HUD2").AddChild(sLeaser.sprites[godPipsIndex[self] + 2 + i]);
-                    // Remove from container and add godPips to FContainer HUD2
+                    // Add godPips to FContainer HUD2
                 }
             }
         }
